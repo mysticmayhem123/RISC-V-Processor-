@@ -10,6 +10,9 @@
 #      params: {WIDTH: your_param}
 #    See the assignment handout for an example.
 yaml_version: 1
+# Partial submission: only adder, mux2, aludec, alu and mux3 are implemented.
+# Keep the first stage until its remaining blocks are provided. No supported
+# stage selects just these five blocks; full-stage CI is expected to be incomplete.
 stage: fetch
 
 modules:
