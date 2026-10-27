@@ -58,7 +58,6 @@ module blocks_tb;
                 1: expected = a - b;
                 2: expected = a & b;
                 3: expected = a | b;
-                // Independent SLT oracle: compare signs before magnitudes.
                 5: expected = (a[31] != b[31]) ? {31'b0, a[31]} : {31'b0, (a < b)};
                 default: expected = 0;
             endcase
@@ -95,7 +94,6 @@ module blocks_tb;
             random_state = next_random(random_state); c = random_state;
             exercise_operands();
         end
-        // All 128 binary decoder input combinations, including unused encodings.
         for (k = 0; k < 4; k = k + 1)
             for (f = 0; f < 8; f = f + 1)
                 for (o = 0; o < 2; o = o + 1)

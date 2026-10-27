@@ -4,7 +4,6 @@ module mux3 #(parameter WIDTH = 8) (
     input  logic [1:0]       s,
     output logic [WIDTH-1:0] y
 );
-    // Select 11 is unused by the datapath and returns zero.
     always_comb begin
         case (s)
             2'b00: y = d0;

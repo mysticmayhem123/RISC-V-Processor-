@@ -1,5 +1,3 @@
-# Run from any directory: vivado -mode batch -source scripts/validate.tcl
-# Optional: -tclargs <installed FPGA part>
 set root [file normalize [file join [file dirname [info script]] ..]]
 set build [file join $root build]
 file mkdir $build
@@ -13,7 +11,6 @@ set sources [list \
     [file join $root ALU rtl.sv] \
     [file join $root ALU_Decoder rtl.sv]]
 
-# Standalone XSim flow avoids modifying the project and propagates failures.
 set bin [file dirname [info nameofexecutable]]
 if {![file exists [file join $bin xvlog.bat]]} {
     set bin [file normalize [file join $::env(XILINX_VIVADO) bin]]

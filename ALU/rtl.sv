@@ -10,7 +10,6 @@ module alu (
             3'b001: result = a - b;
             3'b010: result = a & b;
             3'b011: result = a | b;
-            // SLT compares signed operands, including opposite-sign extremes.
             3'b101: result = {31'b0, ($signed(a) < $signed(b))};
             default: result = 32'b0;
         endcase

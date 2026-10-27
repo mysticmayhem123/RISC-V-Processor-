@@ -9,15 +9,14 @@ module aludec (
     always_comb begin
         ALUControl = 3'b000;
         case (ALUOp)
-            2'b00: ALUControl = 3'b000; // LW/SW address addition
-            2'b01: ALUControl = 3'b001; // BEQ subtraction
+            2'b00: ALUControl = 3'b000;
+            2'b01: ALUControl = 3'b001;
             2'b10: begin
                 case (funct3)
-                    // Immediate bit 30 must not turn ADDI into SUB.
                     3'b000: ALUControl = (opb5 & funct7b5) ? 3'b001 : 3'b000;
-                    3'b010: ALUControl = 3'b101; // SLT/SLTI
-                    3'b110: ALUControl = 3'b011; // OR/ORI
-                    3'b111: ALUControl = 3'b010; // AND/ANDI
+                    3'b010: ALUControl = 3'b101;
+                    3'b110: ALUControl = 3'b011;
+                    3'b111: ALUControl = 3'b010;
                     default: ALUControl = 3'b000;
                 endcase
             end
