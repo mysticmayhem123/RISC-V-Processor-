@@ -1,0 +1,31 @@
+# CI configuration. Edit this file, then commit and push.
+#
+# 1. Set `stage` (fetch -> decode_control -> execute -> integration -> system).
+#    CI checks that stage and every earlier one; modules of later stages are ignored.
+# 2. Point `source_files` at your .sv file for each module you have written. The paths below are
+#    only suggestions: use any file names or folders.
+# 3. Only if your module/port/parameter names differ from the spec, add under that module:
+#      top_module: my_name
+#      ports:  {spec_port: your_port}
+#      params: {WIDTH: your_param}
+#    See the assignment handout for an example.
+yaml_version: 1
+stage: fetch
+
+modules:
+  flopr:       {source_files: [Resettable_FF/rtl.sv]}
+  flopenr:     {source_files: [Resettable_En_FF/rtl.sv]}
+  adder:       {source_files: [Adder/rtl.sv]}
+  mux2:        {source_files: [2to1_Multiplexer/rtl.sv]}
+  imem:        {source_files: [IMEM/rtl.sv]}
+  regfile:     {source_files: [Register_File/rtl.sv]}
+  extend:      {source_files: [Sign_Extender/rtl.sv]}
+  maindec:     {source_files: [Main_Decoder/rtl.sv]}
+  aludec:      {source_files: [ALU_Decoder/rtl.sv]}
+  controller:  {source_files: [Control_Unit/rtl.sv]}
+  alu:         {source_files: [ALU/rtl.sv]}
+  mux3:        {source_files: [3to1_Multiplexer/rtl.sv]}
+  datapath:    {source_files: [Datapath/rtl.sv]}
+  riscvsingle: {source_files: [RISCV_Wrapper/rtl.sv]}
+  dmem:        {source_files: [DMEM/rtl.sv]}
+  top:         {source_files: [Top/rtl.sv]}
