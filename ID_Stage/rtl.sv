@@ -28,27 +28,3 @@ imm_generator immediate_unit (.imm_input(imm), .fn3(fn3_out_d), .opcode(opcode_o
 register_file registers (.rs1_sel(rs1), .rs2_sel(rs2), .reg_write(reg_write && !stall), .clk(clk), .reset(reset), .wb_data(wb_data), .rd_sel(rd), .rs1_data(rs1_data), .rs2_data(rs2_data));
 main_control control_unit (.opcode(opcode_out_d), .fn3(fn3_out_d), .memtoreg(memtoreg), .branch(branch), .mux_inp(mux_inp), .memread(mem_read), .memwrite(mem_write), .alusrc(alu_src), .reg_write(reg_write), .aluop(aluop));
 endmodule
-
-
-
-
-
-module register_file(
-    input  logic [4:0]  rs1_sel, rs2_sel,
-    input  logic        reg_write,
-    input  logic        clk,
-    input  logic        reset,
-    input  logic [31:0] wb_data,
-    input  logic [4:0]  rd_sel,
-    output logic [31:0] rs1_data, rs2_data
-);
-logic [31:0] registers [0:31];
-integer i;
-assign rs1_data = rs1_sel == 0 ? 32'b0 : registers[rs1_sel];
-assign rs2_data = rs2_sel == 0 ? 32'b0 : registers[rs2_sel];
-always_ff @(posedge clk or posedge reset) begin
-    if (reset) begin
-        for (i = 0; i < 32; i = i + 1) registers[i] <= 32'b0;
-    end else if (reg_write && rd_sel != 0) registers[rd_sel] <= wb_data;
-end
-endmodule
